@@ -1,17 +1,17 @@
-#from distutils.core import setup
-from setuptools import setup
+from distutils.core import setup
+#from setuptools import setup
 setup(
   name = 'py_salesforce',
   packages = ['py_salesforce'],
   package_data={
     'py_salesforce': ['py_salesforce.conf'],
   },
-  version = '0.2.3',
+  version = '0.2.4',
   description = ' A Python wrapper for the Salesforce REST API and SOQL.',
   author = 'Mohamed AboElKheir',
   author_email = 'mohamed.osama.aboelkheir@gmail.com',
   url = 'https://github.com/mohamed-osama-aboelkheir/py_salesforce', 
-  download_url = 'https://github.com/mohamed-osama-aboelkheir/py_salesforce/tarball/0.2.3', 
+  download_url = 'https://github.com/mohamed-osama-aboelkheir/py_salesforce/tarball/0.2.4', 
   keywords = ['salesforce', 'REST', 'API','SOQL'], 
   install_requires=['httplib2'],
   classifiers = [
