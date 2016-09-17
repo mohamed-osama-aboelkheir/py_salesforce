@@ -21,7 +21,7 @@
 
  AUTHOR: 	Mohamed Osama (mohamed.osama.aboelkheir@gmail.com)
  CREATED: 	Fri 27-Nov-2015
- LAST REVISED:	Fri 16-Sep-2016
+ LAST REVISED:	Fri 17-Sep-2016
 
 ##############
 # DISCLAIMER #
@@ -93,7 +93,7 @@ class py_salesforce:
 	
 	# (Internal usage) This function connects to salesforce to start session and save session id
 	def session_request(self):
-		"""(Internal usage) This function connects to salesforce to start session and saves session id"""
+		"""(Internal usage) This function connects to salesforce to start session and saves session id ... returns boolean"""
 		
 		success=False
 
@@ -194,7 +194,7 @@ xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"> \
 
 	# (Internal usage) This function runs the query
 	def run_query(self,url,key="records"):
-		"""(Internal usage) This function runs the query"""
+		"""(Internal usage) This function runs the query ... returns List of dictionaries (records) if successful and returns False if failed """
 		
 		http = httplib2.Http()
 		headers = {'Authorization': 'Bearer '+self.session_id}
@@ -262,7 +262,7 @@ xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"> \
 
 	# This function initiates a query using REST API
 	def query(self,table,columns,conditions=[],filters=[]):
-		""" This function creates a query and runs it using the REST API.
+		""" This function creates a query and runs it using the REST API ... returns List of dictionaries (records) if successful and returns False if failed.
 ARGUMENTS:
 
 	table: The Table (Object) of the query.
@@ -297,6 +297,9 @@ EXAMPLE:
 
 			query=query+"+WHERE+"+"+AND+".join(conditions)
 
+		# convert spaces to +
+		query=query.replace(" ","+")
+
 		# Get records
 		records = self.run_query(url+query)
 
@@ -317,7 +320,7 @@ EXAMPLE:
 
 	
 	def query_SOQL(self,soql,filters=[]):
-		""" This function runs a query using the REST API.
+		""" This function runs a query using the REST API ... returns List of dictionaries (records) if successful and returns False if failed.
 ARGUMENTS:
 
 	soql: The SOQL query.
@@ -492,7 +495,7 @@ EXAMPLE:
 
 	# This function shows all available objects for your environment
 	def show_all_objects(self,print_all=True):
-		""" This function shows all available objects for your environment.
+		""" This function shows all available objects for your environment ... returns List of dictionaries (objects) if successful and returns False if failed.
 ARGUMENTS:
 
 	print_all: If True, the names of the Objects will be printed on the screen, otherwise a list of objects will only be returned.
@@ -521,7 +524,7 @@ ARGUMENTS:
 
 	# This function searches Objects with a certain string in their name
 	def search_objects(self,string,print_all=True,case_sensitive=False):
-		""" This function searches for Objects.
+		""" This function searches for Objects ... returns List of dictionaries (objects) if successful and returns False if failed.
 ARGUMENTS:
 
 	string: The string to search for in the Object name.
@@ -566,7 +569,7 @@ EXAMPLE:
 
 	# This functions describes the fields and the relations of an object
 	def describe_object(self,object_name,print_fields=True,print_child_rel=True):
-		"""This functions describes the fields and the relations of an object.
+		"""This functions describes the fields and the relations of an object ... returns 2 Lists of dictionaries (fields and child relations) if successful and returns False if failed.
 ARGUMENTS:
 
 	object_name: Name of the Object(Table)
@@ -657,7 +660,7 @@ EXAMPLES:
 
 	# fucntion to select all columns (fields) from an Object
 	def select_all(self,table,conditions=[],filters=[]):
-		""" This function generates a query that shows all possible columns of an Object
+		""" This function generates a query that shows all possible columns of an Object ... returns List of dictionaries (records) if successful and returns False if failed.
 ARGUMENTS:
 
 	table, conditions, filters: same as query() functions.
